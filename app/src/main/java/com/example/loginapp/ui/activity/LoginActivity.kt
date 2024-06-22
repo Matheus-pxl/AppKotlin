@@ -5,21 +5,24 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.loginapp.databinding.ActivityConfigBinding
 import com.example.loginapp.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var binding2: ActivityConfigBinding // Corrigido para o nome correto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Infla o layout usando View Binding
+        // Infla o layout usando View Binding para a LoginActivity
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Esconde a ActionBar (barra superior)
         supportActionBar?.hide()
+
+        // Infla o layout usando View Binding para a ConfigActivity
+        binding2 = ActivityConfigBinding.inflate(layoutInflater)
 
         // Configura o OnClickListener para o botão de login
         binding.btLogin.setOnClickListener {
@@ -43,6 +46,11 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // Configura o OnClickListener para o botão de configurações
+        binding.btConfig.setOnClickListener {
+            navegarParaConfigs()
+        }
     }
 
     // Função para exibir uma mensagem usando Snackbar
@@ -57,6 +65,12 @@ class LoginActivity : AppCompatActivity() {
     private fun navegarParaHome(nome: String) {
         val intent = Intent(this, HomeActivity::class.java)
         intent.putExtra("nome", nome)
+        startActivity(intent)
+    }
+
+    // Função para navegar para a tela ConfigActivity
+    private fun navegarParaConfigs() {
+        val intent = Intent(this, ConfigActivity::class.java)
         startActivity(intent)
     }
 }
