@@ -10,8 +10,9 @@ import java.util.Date
  * Entidade que representa um usuário no banco de dados.
  * @property id Identificador único do usuário (chave primária).
  * @property nome Nome do usuário.
- * @property endereco Endereço do usuário.
+ * @property email Email do usuário.
  * @property nascimento Data de nascimento do usuário, convertida utilizando DateConverter.
+ * @property senha Senha do usuário.
  */
 @Entity
 class Usuario(
@@ -21,8 +22,11 @@ class Usuario(
     @ColumnInfo(name = "nome")
     var nome: String?,
 
-    @ColumnInfo(name = "endereço")
-    var endereco: String?,
+    @ColumnInfo(name = "email")
+    var email: String?,
+
+    @ColumnInfo(name = "senha")
+    var senha: String?,
 
     @TypeConverters(DateConverter::class)
     @ColumnInfo(name = "nascimento")
