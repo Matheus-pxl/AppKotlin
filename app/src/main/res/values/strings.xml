@@ -45,4 +45,9 @@
     <string name="nome">Nome</string>
     <string name="senha">Senha</string>
     <string name="entrar">Entrar</string>
+    <string name="registrar">Registrar</string>
+    <string name="data_de_nascimento">Data de nascimento</string>
+    <string name="qual_seu_email">Qual seu email</string>
+    <string name="digite_uma_senha">Digite uma senha</string>
+    <string name="digite_o_seu_login">Digite o seu login!</string>
 </resources>
