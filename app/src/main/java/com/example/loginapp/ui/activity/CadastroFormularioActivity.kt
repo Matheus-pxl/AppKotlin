@@ -17,7 +17,7 @@ class CadastroFormularioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_formulario)
-
+        setTitle("Cadastro")
         val buttonRegistro = findViewById<Button>(R.id.btRegistrar)
         val editTextNomeLogin = findViewById<EditText>(R.id.editNomeLoginFormulario)
         val editTextSenha = findViewById<EditText>(R.id.editSenhaFormulario)

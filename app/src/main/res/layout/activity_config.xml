@@ -7,4 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.ConfigActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="55dp"
+        android:layout_height="88dp"
+        android:src="@drawable/ic_action_name"
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="94dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

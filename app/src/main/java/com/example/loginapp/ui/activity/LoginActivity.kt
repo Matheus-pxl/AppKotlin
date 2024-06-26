@@ -11,7 +11,6 @@ import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var binding2: ActivityConfigBinding // Corrigido para o nome correto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,9 +19,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-
-        // Infla o layout usando View Binding para a ConfigActivity
-        binding2 = ActivityConfigBinding.inflate(layoutInflater)
 
         // Configura o OnClickListener para o botão de login
         binding.btLogin.setOnClickListener {
@@ -51,6 +47,10 @@ class LoginActivity : AppCompatActivity() {
         binding.btConfig.setOnClickListener {
             navegarParaConfigs()
         }
+        binding.btCriarConta.setOnClickListener{
+            navegarParaCriarConta()
+        }
+
     }
 
     // Função para exibir uma mensagem usando Snackbar
@@ -71,6 +71,10 @@ class LoginActivity : AppCompatActivity() {
     // Função para navegar para a tela ConfigActivity
     private fun navegarParaConfigs() {
         val intent = Intent(this, ConfigActivity::class.java)
+        startActivity(intent)
+    }
+    private fun navegarParaCriarConta(){
+        val intent = Intent(this, CadastroFormularioActivity::class.java)
         startActivity(intent)
     }
 }
