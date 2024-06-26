@@ -8,7 +8,10 @@ import com.example.loginapp.R
 import com.example.loginapp.json.HttpHelper
 import com.example.loginapp.model.Usuario
 import com.google.gson.Gson
-import org.jetbrains.anko.doAsync
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CadastroFormularioActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +36,12 @@ class CadastroFormularioActivity : AppCompatActivity() {
             val gson= Gson()
             val usuarioJson = gson.toJson(usuario)
 
-            doAsync {
+            CoroutineScope(Dispatchers.IO).launch {
                 val http = HttpHelper()
-                http.post(usuarioJson)
+                val response = http.post(usuarioJson)
+                withContext(Dispatchers.Main) {
+                    // Handle response (e.g., show a toast or update UI)
+                }
             }
         }
 
