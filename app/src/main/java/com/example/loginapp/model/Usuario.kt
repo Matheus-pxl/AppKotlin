@@ -15,20 +15,22 @@ import java.util.Date
  * @property senha Senha do usuário.
  */
 @Entity
-class Usuario(
+class Usuario {
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int = 0
 
     @ColumnInfo(name = "nome")
-    var nome: String?,
+    var nome: String? = ""
 
     @ColumnInfo(name = "email")
-    var email: String?,
+    var email: String? = ""
 
     @ColumnInfo(name = "senha")
-    var senha: String?,
-
-    @TypeConverters(DateConverter::class)
-    @ColumnInfo(name = "nascimento")
-    var nascimento: Date?
-)
+    var senha: String? = ""
+    override  fun toString():String{
+        return "Usuario (nome '$nome', email='$email', senha = '$senha')"
+    }
+//    @TypeConverters(DateConverter::class)
+//    @ColumnInfo(name = "nascimento")
+//    var nascimento: Date?
+}
