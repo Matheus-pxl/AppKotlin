@@ -11,9 +11,9 @@
         android:id="@+id/editNomeLoginFormulario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="36dp"
         android:layout_marginLeft="36dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="36dp"
         android:hint="@string/digite_o_seu_login"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,16 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editSenhaFormulario"/>
-    <EditText
-        android:id="@+id/editNascimentoFormulario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="36dp"
-        android:inputType="date"
-        android:hint="@string/data_de_nascimento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editEmailFormulario"/>
+
     <Button
         android:id="@+id/btRegistrar"
         android:layout_width="wrap_content"
@@ -59,5 +50,5 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editNascimentoFormulario"/>
+        app:layout_constraintTop_toBottomOf="@id/editEmailFormulario"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

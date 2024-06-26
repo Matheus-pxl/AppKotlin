@@ -9,7 +9,8 @@ import okhttp3.RequestBody
 class HttpHelper {
     fun post(json: String) :String{
         //definir URL do servidor
-        val URL = "endereço aqui"
+
+        val URL = "http://192.168.1.185:8080"
         //definir o cabecalho
         val headerHttp = "application/json; charset-utf-8".toMediaTypeOrNull()
 
