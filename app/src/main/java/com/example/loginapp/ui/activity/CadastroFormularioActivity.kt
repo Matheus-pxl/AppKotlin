@@ -43,6 +43,7 @@ class CadastroFormularioActivity : AppCompatActivity() {
                     // Handle response (e.g., show a toast or update UI)
                 }
             }
+            finish()
         }
 
 
