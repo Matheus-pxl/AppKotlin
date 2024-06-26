@@ -5,7 +5,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.loginapp.R
-import com.example.loginapp.json.HttpHelper
+import com.example.loginapp.http.HttpHelper
 import com.example.loginapp.model.Usuario
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
