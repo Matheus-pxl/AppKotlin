@@ -18,34 +18,44 @@ class CadastroFormularioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_formulario)
         setTitle("Cadastro")
+
+        // Referências aos elementos de UI
         val buttonRegistro = findViewById<Button>(R.id.btRegistrar)
         val editTextNomeLogin = findViewById<EditText>(R.id.editNomeLoginFormulario)
         val editTextSenha = findViewById<EditText>(R.id.editSenhaFormulario)
         val editTextEmail = findViewById<EditText>(R.id.editEmailFormulario)
-//        val editTextNascimento = findViewById<EditText>(R.id.editNascimentoFormulario)
+        // val editTextNascimento = findViewById<EditText>(R.id.editNascimentoFormulario)
 
-        buttonRegistro.setOnClickListener{
-            //criar objeto usuario
+        // Configuração do listener para o botão de registro
+        buttonRegistro.setOnClickListener {
+            // Criar objeto de usuário com base nos campos de entrada
             val usuario = Usuario()
-            usuario.nome = editTextNomeLogin.text.toString()
-            usuario.senha = editTextSenha.text.toString()
-            usuario.email = editTextEmail.text.toString()
-//            usuario.nascimento = editTextNascimento.text.toString()
+                usuario.nome = editTextNomeLogin.text.toString()
+                usuario.senha = editTextSenha.text.toString()
+                usuario.email = editTextEmail.text.toString()
+                // nascimento = editTextNascimento.text.toString()
 
-            //converter usuario em Json
-            val gson= Gson()
+
+            // Converter o objeto usuário para JSON usando Gson
+            val gson = Gson()
             val usuarioJson = gson.toJson(usuario)
 
+            // Executar a operação de rede em uma coroutine utilizando Dispatchers.IO
             CoroutineScope(Dispatchers.IO).launch {
+                // Instanciar o helper HTTP
                 val http = HttpHelper()
+
+                // Enviar o JSON do usuário para o servidor e receber a resposta
                 val response = http.post(usuarioJson)
+
+                // Manipular a resposta dentro do contexto da thread principal (Dispatchers.Main)
                 withContext(Dispatchers.Main) {
-                    // Handle response (e.g., show a toast or update UI)
+                    // Aqui você pode lidar com a resposta, como mostrar um Toast ou atualizar a UI
+                    // Exemplo: Toast.makeText(applicationContext, "Resposta recebida: $response", Toast.LENGTH_SHORT).show()
                 }
             }
+            // Finalizar a activity após o registro (opcional)
             finish()
         }
-
-
     }
 }
