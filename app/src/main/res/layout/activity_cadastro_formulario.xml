@@ -14,7 +14,8 @@
         android:layout_marginRight="36dp"
         android:layout_marginLeft="36dp"
         android:layout_marginTop="160dp"
-        android:hint="Digite o seu login!"
+        android:hint="@string/digite_o_seu_login"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_margin="36dp"
         android:layout_height="wrap_content"
-        android:hint="Digite uma senha"
+        android:hint="@string/digite_uma_senha"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editNomeLoginFormulario"/>
@@ -35,7 +37,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:layout_margin="36dp"
-        android:hint="Qual seu email"
+        android:hint="@string/qual_seu_email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editSenhaFormulario"/>
@@ -45,14 +47,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="36dp"
         android:inputType="date"
-        android:hint="Data de nascimento"
+        android:hint="@string/data_de_nascimento"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editEmailFormulario"/>
     <Button
         android:id="@+id/btRegistrar"
         android:layout_width="wrap_content"
-        android:text="Registrar"
+        android:text="@string/registrar"
         android:layout_margin="36dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
