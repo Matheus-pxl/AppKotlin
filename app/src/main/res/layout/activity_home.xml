@@ -7,11 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.HomeActivity">
 
+    <TextView
+        android:id="@+id/urlDumpText"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+
+        android:text="TextView" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HOME"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="295dp" />
+        android:text="test"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="161dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
