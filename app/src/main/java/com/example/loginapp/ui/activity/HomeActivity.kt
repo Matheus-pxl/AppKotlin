@@ -21,31 +21,6 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setTitle("Home")
 
-        binding.buttonTest.setOnClickListener{
-            val URL : String= ""
-            if(URL.isNotEmpty()){
-                val client = OkHttpClient()
-                val request = Request.Builder().url(URL).build()
-                client.newCall(request).enqueue(object : Callback{
-                    override fun onFailure(call: Call, e: IOException) {
-                        e.printStackTrace()
-                    }
 
-                    override fun onResponse(call: Call, response: Response) {
-                        Log.i("response","Received response from server")
-                        response.use{
-                            if(!response.isSuccessful){
-                                Log.e("HTTP Error","Something didn't load, or wasn't successful")
-
-                            }else{
-                                val body = response?.body?.string()
-                                binding.urlDumpText.text = body
-                            }
-                        }
-                    }
-
-                })
-            }
-        }
     }
 }

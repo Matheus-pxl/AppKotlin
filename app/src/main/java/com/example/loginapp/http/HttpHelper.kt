@@ -1,5 +1,6 @@
 package com.example.loginapp.http
 
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -35,7 +36,7 @@ class HttpHelper {
         } catch (e: Exception) {
             // Tratar exceções de rede ou outras exceções
             e.printStackTrace()
-            return "Erro ao fazer a requisição: ${e.message}"
+            return "Error ao fazer aa requisição: ${e.message}"
         }
     }
     fun get(): String {

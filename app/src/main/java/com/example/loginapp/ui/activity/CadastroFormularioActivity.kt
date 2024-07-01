@@ -36,7 +36,6 @@ class CadastroFormularioActivity : AppCompatActivity() {
                 usuario.email = editTextEmail.text.toString()
                 // nascimento = editTextNascimento.text.toString()
 
-
             // Converter o objeto usuário para JSON usando Gson
             val gson = Gson()
             val usuarioJson = gson.toJson(usuario)
@@ -52,10 +51,7 @@ class CadastroFormularioActivity : AppCompatActivity() {
                     // Manipular a resposta dentro do contexto da thread principal (Dispatchers.Main)
                     withContext(Dispatchers.Main) {
                         // Mostrar um Toast com a resposta recebida do servidor
-                        Toast.makeText(applicationContext, "Resposta recebida: $response", Toast.LENGTH_LONG).show()
-
-                        // Opcionalmente, finalizar a activity após o registro
-                        finish()
+                        Toast.makeText(applicationContext, "Resposta recebida//: $response", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     // Tratar exceções, como falha na conexão
