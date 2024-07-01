@@ -6,7 +6,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.loginapp.R
+import com.example.loginapp.http.ApiService
 import com.example.loginapp.http.HttpHelper
+import com.example.loginapp.http.RetrofitClient
 import com.example.loginapp.model.Usuario
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
@@ -15,6 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CadastroFormularioActivity : AppCompatActivity() {
+    private lateinit var apiService: ApiService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_formulario)
@@ -26,17 +29,18 @@ class CadastroFormularioActivity : AppCompatActivity() {
         val editTextSenha = findViewById<EditText>(R.id.editSenhaFormulario)
         val editTextEmail = findViewById<EditText>(R.id.editEmailFormulario)
         // val editTextNascimento = findViewById<EditText>(R.id.editNascimentoFormulario)
+        apiService = RetrofitClient.getApiService()
 
         // Configuração do listener para o botão de registro
         buttonRegistro.setOnClickListener {
             // Criar objeto de usuário com base nos campos de entrada
             val usuario = Usuario()
-                usuario.nome = editTextNomeLogin.text.toString()
-                usuario.senha = editTextSenha.text.toString()
-                usuario.email = editTextEmail.text.toString()
-                // nascimento = editTextNascimento.text.toString()
+//                val nome = editTextNomeLogin.text.toString()
+            usuario.email = editTextEmail.text.toString()
+            usuario.senha = editTextSenha.text.toString()
+            // usuario.nascimento = editTextNascimento.text.toString()
 
-            // Converter o objeto usuário para JSON usando Gson
+            // Converter o usuário para JSON
             val gson = Gson()
             val usuarioJson = gson.toJson(usuario)
 
@@ -60,7 +64,6 @@ class CadastroFormularioActivity : AppCompatActivity() {
                     }
                 }
             }
-                    // Finalizar a activity após o registro (opcional)
             finish()
         }
     }
