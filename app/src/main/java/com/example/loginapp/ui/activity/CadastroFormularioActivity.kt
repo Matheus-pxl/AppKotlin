@@ -45,18 +45,26 @@ class CadastroFormularioActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 // Instanciar o helper HTTP
                 val http = HttpHelper()
+                try {
+                    // Enviar o JSON do usuário para o servidor e receber a resposta
+                    val response = http.post(usuarioJson)
 
-                // Enviar o JSON do usuário para o servidor e receber a resposta
-                val response = http.post(usuarioJson)
+                    // Manipular a resposta dentro do contexto da thread principal (Dispatchers.Main)
+                    withContext(Dispatchers.Main) {
+                        // Mostrar um Toast com a resposta recebida do servidor
+                        Toast.makeText(applicationContext, "Resposta recebida: $response", Toast.LENGTH_LONG).show()
 
-                // Manipular a resposta dentro do contexto da thread principal (Dispatchers.Main)
-                withContext(Dispatchers.Main) {
-
-                    // Aqui você pode lidar com a resposta, como mostrar um Toast ou atualizar a UI
-                    Toast.makeText(applicationContext, "Resposta recebida: $response", Toast.LENGTH_LONG).show()
+                        // Opcionalmente, finalizar a activity após o registro
+                        finish()
+                    }
+                } catch (e: Exception) {
+                    // Tratar exceções, como falha na conexão
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(applicationContext, "Erro ao enviar dados: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
-            // Finalizar a activity após o registro (opcional)
+                    // Finalizar a activity após o registro (opcional)
             finish()
         }
     }
