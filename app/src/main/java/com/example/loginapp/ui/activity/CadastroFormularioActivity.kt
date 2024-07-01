@@ -3,6 +3,7 @@ package com.example.loginapp.ui.activity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.loginapp.R
 import com.example.loginapp.http.HttpHelper
@@ -50,8 +51,9 @@ class CadastroFormularioActivity : AppCompatActivity() {
 
                 // Manipular a resposta dentro do contexto da thread principal (Dispatchers.Main)
                 withContext(Dispatchers.Main) {
+
                     // Aqui você pode lidar com a resposta, como mostrar um Toast ou atualizar a UI
-                    // Exemplo: Toast.makeText(applicationContext, "Resposta recebida: $response", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Resposta recebida: $response", Toast.LENGTH_LONG).show()
                 }
             }
             // Finalizar a activity após o registro (opcional)
