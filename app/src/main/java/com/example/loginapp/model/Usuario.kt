@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 @Entity
-class Usuario(email: String, senha: String) {
+class Usuario() {
 //    @PrimaryKey(autoGenerate = true)
 //    var id: Int = 0
 //

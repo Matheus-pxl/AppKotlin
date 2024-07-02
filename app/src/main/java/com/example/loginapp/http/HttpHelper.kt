@@ -14,11 +14,11 @@ class HttpHelper {
         val URL = "http://gestao.econsoft.com.br/ws/teste.php"
 
         // Definir o cabeçalho
-        val headerHttp = "application/json; charset=utf-8".toMediaTypeOrNull()
+        val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
         // Criar um cliente que vai disparar a requisição
         val client = OkHttpClient()
         // Criar o body da requisição
-        val body = RequestBody.create(headerHttp, json)
+        val body = RequestBody.create(mediaType, json)
         // Construir a requisição POST HTTP para o servidor
         val request = Request.Builder()
             .url(URL)
