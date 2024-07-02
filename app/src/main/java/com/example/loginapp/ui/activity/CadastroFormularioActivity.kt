@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import android.util.Log
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -42,12 +43,14 @@ class CadastroFormularioActivity : AppCompatActivity() {
             // Criar objeto de usuário com base nos campos de entrada
             val usuario = Usuario()
             //val nome = editTextNomeLogin.text.toString()
-            val email = editSenhaFormulario.text.toString()
-            val senha = editEmailFormulario.text.toString()
+            usuario.senha = editSenhaFormulario.text.toString()
+            usuario.email = editEmailFormulario.text.toString()
             // usuario.nascimento = editTextNascimento.text.toString()
 
             val gson = Gson()
             val usuarioJson = gson.toJson(usuario)
+
+            Log.d("API_REQUEST", "JSON enviado para a API: $usuarioJson")
 
             // Executar a operação de rede em uma coroutine utilizando Dispatchers.IO
             CoroutineScope(Dispatchers.IO).launch {
