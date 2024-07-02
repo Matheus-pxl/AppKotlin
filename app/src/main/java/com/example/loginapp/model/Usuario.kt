@@ -2,6 +2,7 @@ package com.example.loginapp.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import kotlinx.serialization.Serializable
 
 /**
  * Entidade que representa um usuário no banco de dados.
@@ -11,8 +12,9 @@ import androidx.room.Entity
  * @property nascimento Data de nascimento do usuário, convertida utilizando DateConverter.
  * @property senha Senha do usuário.
  */
+@Serializable
 @Entity
-class Usuario {
+class Usuario(email: String, senha: String) {
 //    @PrimaryKey(autoGenerate = true)
 //    var id: Int = 0
 //
