@@ -46,7 +46,7 @@ class CadastroFormularioActivity : AppCompatActivity() {
             val senha = editEmailFormulario.text.toString()
             // usuario.nascimento = editTextNascimento.text.toString()
 
-            val gson = Gson()/
+            val gson = Gson()
             val usuarioJson = gson.toJson(usuario)
 
             // Executar a operação de rede em uma coroutine utilizando Dispatchers.IO
