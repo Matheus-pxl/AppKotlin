@@ -1,5 +1,6 @@
 package com.example.loginapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -31,25 +32,24 @@ class CadastroFormularioActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cadastro_formulario)
         setTitle("Cadastro")
 
-        // Referências aos elementos de UI
-        btRegistrar = findViewById<Button>(R.id.btRegistrar)
-        val editTextNomeLogin = findViewById<EditText>(R.id.editNomeLoginFormulario)
-        editEmailFormulario = findViewById<EditText>(R.id.editEmailFormulario)
-        editSenhaFormulario = findViewById<EditText>(R.id.editSenhaFormulario)
-        // val editTextNascimento = findViewById<EditText>(R.id.editNascimentoFormulario)
+        initViews()
+        buttonRegistrar()
+    }
 
-        // Configuração do listener para o botão de registro
+    private fun buttonRegistrar() {
         btRegistrar.setOnClickListener {
             // Criar objeto de usuário com base nos campos de entrada
             val usuario = Usuario()
-            //val nome = editTextNomeLogin.text.toString()
             usuario.senha = editSenhaFormulario.text.toString()
             usuario.email = editEmailFormulario.text.toString()
-            // usuario.nascimento = editTextNascimento.text.toString()
 
+            // Validação básica dos campos
+            if (usuario.email.isNullOrEmpty() || usuario.senha.isNullOrEmpty()) {
+                Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val gson = Gson()
             val usuarioJson = gson.toJson(usuario)
-
             Log.d("API_REQUEST", "JSON enviado para a API: $usuarioJson")
 
             // Executar a operação de rede em uma coroutine utilizando Dispatchers.IO
@@ -59,139 +59,53 @@ class CadastroFormularioActivity : AppCompatActivity() {
                 try {
                     // Enviar o JSON do usuário para o servidor e receber a resposta
                     val response = http.post(usuarioJson)
-
                     // Manipular a resposta dentro do contexto da thread principal (Dispatchers.Main)
-                    withContext(Dispatchers.Main) {
-                        // Mostrar um Toast com a resposta recebida do servidor
-                        Toast.makeText(
-                            applicationContext,
-                            "Resposta recebida//: $response",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    handleResponse(response, usuario)
                 } catch (e: Exception) {
                     // Tratar exceções, como falha na conexão
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(
-                            applicationContext,
-                            "Erro ao enviar dados: ${e.message}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    handleException(e)
                 }
             }
             finish()
         }
+    }
 
-//        if (validarCampos(email, senha)) {
-//            sendRegisterData(email, senha)
-//        }
+    private suspend fun handleException(e: Exception) {
+        withContext(Dispatchers.Main) {
+            Toast.makeText(
+                applicationContext,
+                "Erro ao enviar dados: ${e.message}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
+    private suspend fun handleResponse(
+        response: String,
+        usuario: Usuario
+    ) {
+        withContext(Dispatchers.Main) {
+            // Mostrar um Toast com a resposta recebida do servidor
+            Toast.makeText(
+                applicationContext, "Resposta recebida//: $response", Toast.LENGTH_LONG
+            ).show()
+            navegarParaHome(usuario)
+        }
+    }
+
+    private fun navegarParaHome(usuario: Usuario) {
+        val intent = Intent(applicationContext, HomeActivity::class.java)
+        intent.putExtra(
+            "email",
+            usuario.email
+        ) // Se precisar enviar a resposta para a próxima Activity
+        startActivity(intent)
+    }
+
+    private fun initViews() {
+        // Referências aos elementos de UI
+        btRegistrar = findViewById<Button>(R.id.btRegistrar)
+        editEmailFormulario = findViewById<EditText>(R.id.editEmailFormulario)
+        editSenhaFormulario = findViewById<EditText>(R.id.editSenhaFormulario)
     }
 }
-
-//private fun sendRegisterData(email: String, senha: String) {
-//    val client = OkHttpClient()
-//    val URL = "http://gestao.econsoft.com.br/ws/teste.php"
-//    val userData = Usuario(email, senha)
-//    val json = Json.encodeToString(userData)
-//    val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
-//    val body = json.toRequestBody(mediaType)
-//    val request =
-//        Request
-//            .Builder()
-//            .url(URL)
-//            .post(body)
-//            .build()
-//    client.newCall(request).enqueue(object : okhttp3.Callback {
-//        override fun onFailure(call: okhttp3.Call, e: IOException) {
-//            runOnUiThread {
-//                Toast.makeText(
-//                    this@CadastroFormularioActivity,
-//                    "erro ao enviar dados",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//            }
-//        }
-//
-//        override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-//            runOnUiThread {
-//                if (response.isSuccessful) {
-//                    Toast.makeText(
-//                        this@CadastroFormularioActivity,
-//                        "cadastro realizado com sucesso: $response",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                } else {
-//                    Toast.makeText(
-//                        this@CadastroFormularioActivity,
-//                        "erro no cadastro: $response",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
-//            }
-//        }
-//    })
-//}
-//
-//private fun validarCampos(email: String, senha: String): Boolean {
-//    return when {
-//        email.isEmpty() -> {
-//            editEmailFormulario.error = "porfavor digite um email"
-//            editEmailFormulario.requestFocus()
-//            false
-//        }
-//
-//        senha.isEmpty() -> {
-//            editSenhaFormulario.error = "porfavor digite uma senha"
-//            editSenhaFormulario.requestFocus()
-//            false
-//        }
-//
-//        senha.length < 6 -> {
-//            editSenhaFormulario.error = "a senha precisa ser maior que 6 digitos"
-//            editSenhaFormulario.requestFocus()
-//            false
-//        }
-//
-//        else -> true
-//    }
-//}
-
-//    private fun PostTry() {
-//        val usuario = Usuario()
-//
-//        val gson = Gson()
-//        val usuarioJson = gson.toJson(usuario)
-//
-//        // Executar a operação de rede em uma coroutine utilizando Dispatchers.IO
-//        CoroutineScope(Dispatchers.IO).launch {
-//            // Instanciar o helper HTTP
-//            val http = HttpHelper()
-//            try {
-//                // Enviar o JSON do usuário para o servidor e receber a resposta
-//                val response = http.post(usuarioJson)
-//
-//                // Manipular a resposta dentro do contexto da thread principal (Dispatchers.Main)
-//                withContext(Dispatchers.Main) {
-//                    // Mostrar um Toast com a resposta recebida do servidor
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "Resposta recebida//: $response",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
-//            } catch (e: Exception) {
-//                // Tratar exceções, como falha na conexão
-//                withContext(Dispatchers.Main) {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "Erro ao enviar dados: ${e.message}",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
-//            }
-//        }
-//        finish()
-//    }
-
-

@@ -12,7 +12,6 @@ class HttpHelper {
     fun post(json: String): String {
         // Definir URL do servidor
         val URL = "http://gestao.econsoft.com.br/ws/teste.php"
-
         // Definir o cabeçalho
         val mediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
         // Criar um cliente que vai disparar a requisição

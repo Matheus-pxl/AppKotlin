@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.CadastroFormularioActivity">
 
-    <EditText
-        android:id="@+id/editNomeLoginFormulario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="36dp"
-        android:hint="@string/digite_o_seu_login"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editSenhaFormulario"
@@ -29,18 +17,20 @@
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editNomeLoginFormulario"/>
+        app:layout_constraintTop_toBottomOf="@id/editEmailFormulario"/>
 
     <EditText
         android:id="@+id/editEmailFormulario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:layout_margin="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="180dp"
         android:hint="@string/qual_seu_email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editSenhaFormulario"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/btRegistrar"
@@ -50,5 +40,5 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editEmailFormulario"/>
+        app:layout_constraintTop_toBottomOf="@id/editSenhaFormulario"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
