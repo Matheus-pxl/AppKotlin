@@ -64,7 +64,6 @@ class LoginActivity : AppCompatActivity() {
     // Função para navegar para a tela HomeActivity e passar o nome de usuário como extra
     private fun navegarParaHome(nome: String) {
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("nome", nome)
         startActivity(intent)
     }
 
