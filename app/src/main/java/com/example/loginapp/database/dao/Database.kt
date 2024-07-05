@@ -1,10 +1,7 @@
-package com.example.loginapp.database
+package com.example.loginapp.database.dao
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.example.loginapp.database.dao.UsuarioDAO
-import com.example.loginapp.model.DateConverter
 import com.example.loginapp.model.Usuario
 
 /**
@@ -16,7 +13,6 @@ import com.example.loginapp.model.Usuario
  * @property typeConverters Lista de classes de conversores que serão usadas para converter tipos não primitivos em tipos primitivos que o Room pode persistir.
  */
 @Database(entities = [Usuario::class], version = 1, exportSchema = false)
-@TypeConverters(DateConverter::class)
 abstract class database : RoomDatabase() {
 
     /**

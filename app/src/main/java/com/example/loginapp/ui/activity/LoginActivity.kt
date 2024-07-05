@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.loginapp.databinding.ActivityLoginBinding
+import com.example.loginapp.model.Usuario
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {

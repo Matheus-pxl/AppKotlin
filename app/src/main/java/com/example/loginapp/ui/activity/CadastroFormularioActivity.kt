@@ -54,12 +54,12 @@ class CadastroFormularioActivity : AppCompatActivity() {
                     val response = http.post(usuarioJson)
                     // Manipular a resposta dentro do contexto da thread principal (Dispatchers.Main)
                     handleResponse(response, usuario)
+                    finish()
                 } catch (e: Exception) {
                     // Tratar exceções, como falha na conexão
                     handleException(e)
                 }
             }
-            finish()
         }
     }
 
@@ -80,9 +80,8 @@ class CadastroFormularioActivity : AppCompatActivity() {
         withContext(Dispatchers.Main) {
             // Mostrar um Toast com a resposta recebida do servidor
             Toast.makeText(
-                applicationContext, "Resposta recebida//: $response", Toast.LENGTH_LONG
+                applicationContext, "Resposta recebida//usuario cadastrado?: $response", Toast.LENGTH_LONG
             ).show()
-            navegarParaHome(usuario)
         }
     }
 
