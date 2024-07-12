@@ -3,41 +3,70 @@ package com.example.loginapp.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.loginapp.R
+import com.example.loginapp.databinding.ActivityCadastroFormularioBinding
 import com.example.loginapp.http.HttpHelper
+import com.example.loginapp.http.RetrofitInstance
+import com.example.loginapp.http.UserData
 import com.example.loginapp.model.Usuario
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.HttpException
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 
 class CadastroFormularioActivity : AppCompatActivity() {
-    private lateinit var editEmailFormulario: EditText
-    private lateinit var editSenhaFormulario: EditText
-    private lateinit var btRegistrar: Button
+
+    private lateinit var binding:ActivityCadastroFormularioBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cadastro_formulario)
-        setTitle("Cadastro")
-
-        initViews()
+        binding = ActivityCadastroFormularioBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         buttonRegistrar()
     }
 
-    private fun buttonRegistrar() {
-        btRegistrar.setOnClickListener {
+    private fun buttonRegistrar2() {
+        binding.btRegistrar.setOnClickListener {
             // Criar objeto de usuário com base nos campos de entrada
             val usuario = Usuario()
-            usuario.senha = editSenhaFormulario.text.toString()
-            usuario.email = editEmailFormulario.text.toString()
+            val email = binding.editEmailFormulario.text.toString()
+            val senha = binding.editSenhaFormulario.text.toString()
+            if (email.isNotEmpty() && senha.isNotEmpty()) {
+                val postRequest = UserData(email, senha)
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val response = RetrofitInstance.api.register(postRequest)
+                        if (response.isSuccessful && response.body() != null) {
+                            val createdPost = response.body()!!
+                            Log.d("api", "Post criado com sucesso: $createdPost")
+                            // Lógica adicional após o post ser criado com sucesso
+                        } else {
+                            Log.e("api", "Erro ao criar o post: ${response.code()}")
+                        }
+                    } catch (e: IOException) {
+                        Log.e(
+                            "api",
+                            "IOException, você pode não ter conexão com a internet: ${e.message}"
+                        )
+                    } catch (e: HttpException) {
+                        Log.e("api", "HttpException, resposta inesperada: ${e.message}")
+                    }
+                }
+            }
+        }
+    }
 
+    private fun buttonRegistrar() {
+        binding.btRegistrar.setOnClickListener {
+            // Criar objeto de usuário com base nos campos de entrada
+            val usuario = Usuario()
+            val senha = binding.editSenhaFormulario.text.toString()
+            val email = binding.editEmailFormulario.text.toString()
             // Validação básica dos campos
-            if (usuario.email.isNullOrEmpty() || usuario.senha.isNullOrEmpty()) {
+            if (email.isEmpty() || senha.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -92,12 +121,5 @@ class CadastroFormularioActivity : AppCompatActivity() {
             usuario.email
         ) // Se precisar enviar a resposta para a próxima Activity
         startActivity(intent)
-    }
-
-    private fun initViews() {
-        // Referências aos elementos de UI
-        btRegistrar = findViewById<Button>(R.id.btRegistrar)
-        editEmailFormulario = findViewById<EditText>(R.id.editEmailFormulario)
-        editSenhaFormulario = findViewById<EditText>(R.id.editSenhaFormulario)
     }
 }

@@ -7,18 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.CadastroFormularioActivity">
 
-
-    <EditText
-        android:id="@+id/editSenhaFormulario"
-        android:layout_width="match_parent"
-        android:layout_margin="36dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/digite_uma_senha"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editEmailFormulario"/>
-
     <EditText
         android:id="@+id/editEmailFormulario"
         android:layout_width="match_parent"
@@ -31,6 +19,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/editSenhaFormulario"
+        android:layout_width="match_parent"
+        android:layout_margin="36dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/digite_uma_senha"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editEmailFormulario"/>
 
     <Button
         android:id="@+id/btRegistrar"
