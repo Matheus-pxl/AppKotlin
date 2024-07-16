@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Entity
 data class Usuario(
-    var email: String = "",
-    var senha: String = ""
+    val id:Int,
+    val email: String,
+    val senha: String
 )

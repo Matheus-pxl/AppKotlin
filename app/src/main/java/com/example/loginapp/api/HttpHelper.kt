@@ -1,6 +1,5 @@
-package com.example.loginapp.http
+package com.example.loginapp.api
 
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
